@@ -24,4 +24,13 @@
         tools:layout_editor_absoluteX="189dp"
         tools:layout_editor_absoluteY="190dp" />
 
+    <ImageView
+        android:id="@+id/calendarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCalendarButtonClick"
+        app:srcCompat="@android:drawable/checkbox_on_background"
+        tools:layout_editor_absoluteX="196dp"
+        tools:layout_editor_absoluteY="244dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

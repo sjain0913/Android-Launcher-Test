@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -14,9 +15,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    String password = "123456789";
+    boolean appOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +44,13 @@ public class MainActivity extends AppCompatActivity {
     public void onCalculatorButtonClick(View v) {
         Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.sec.android.app.popupcalculator");
         startActivity(launchIntent);
+        appOpen = true;
     }
 
     public void onCalendarButtonClick(View v) {
         Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.samsung.android.calendar");
         startActivity(launchIntent);
+        appOpen = true;
     }
 
     // Method to get app icon for an app (for the 2 apps in launcher)
@@ -54,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
         ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
         return resolveInfo.loadIcon(pm);
     }
+
+    public void AppOpen() {
+        if (appOpen == false) {
+
+        } else {
+
+        }
+
+    }
+
+
 
     // some errors - most likely wont need this because we have the same 2 apps always
     // Method to get package name for a certain appname (to pick the 2 apps to display in launcher)

@@ -25,9 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView calculatorIcon = (ImageView) findViewById(R.id.calculatorButton);
         calculatorIcon.setImageDrawable(getActivityIcon(this, "com.sec.android.app.popupcalculator", "com.sec.android.app.popupcalculator.Calculator"));
+        calculatorIcon.setX(50);
+        calculatorIcon.setY(50);
 
         ImageView calendarIcon = (ImageView) findViewById(R.id.calendarButton);
         calendarIcon.setImageDrawable(getActivityIcon(this, "com.samsung.android.calendar", "com.android.calendar.AllInOneActivity"));
+        calendarIcon.setX(250);
+        calendarIcon.setY(50);
     }
 
 

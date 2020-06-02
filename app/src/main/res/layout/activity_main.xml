@@ -6,23 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/calculatorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onCalculatorButtonClick"
         app:srcCompat="@android:drawable/btn_star_big_on"
-        tools:layout_editor_absoluteX="189dp"
-        tools:layout_editor_absoluteY="190dp" />
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="164dp" />
 
     <ImageView
         android:id="@+id/calendarButton"
@@ -30,7 +21,7 @@
         android:layout_height="wrap_content"
         android:onClick="onCalendarButtonClick"
         app:srcCompat="@android:drawable/checkbox_on_background"
-        tools:layout_editor_absoluteX="196dp"
-        tools:layout_editor_absoluteY="244dp" />
+        tools:layout_editor_absoluteX="268dp"
+        tools:layout_editor_absoluteY="164dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

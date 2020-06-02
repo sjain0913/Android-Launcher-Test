@@ -7,21 +7,40 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/calculatorButton"
+        android:id="@+id/test1Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onCalculatorButtonClick"
+        android:onClick="onTest1ButtonClick"
         app:srcCompat="@android:drawable/btn_star_big_on"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="164dp" />
 
     <ImageView
-        android:id="@+id/calendarButton"
+        android:id="@+id/test2Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onCalendarButtonClick"
+        android:onClick="onTest2ButtonClick"
         app:srcCompat="@android:drawable/checkbox_on_background"
         tools:layout_editor_absoluteX="268dp"
         tools:layout_editor_absoluteY="164dp" />
+
+    <LinearLayout
+        android:id="@+id/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_toggle_kiosk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_kiosk_mode" />
+
+        <Button
+            android:id="@+id/button_check_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_update" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

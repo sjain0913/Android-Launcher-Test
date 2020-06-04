@@ -32,6 +32,4 @@
         </receiver>
 
     </application>
-
-    <uses-permission android:name="android.permission.MANAGE_DEVICE_ADMINS" />
 </manifest>

@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     final Context context = this;
     private EditText result;
+    private static boolean isPinned;
     private static final String password = "abc";
     public static final String APP1_PACKAGE = "com.oblivion.test1";
     public static final String APP2_PACKAGE = "com.oblivion.test2";
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startLockTask();
+        isPinned = true;
 
         // Icons & Buttons
         ImageView test1Icon = (ImageView) findViewById(R.id.test1Button);
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         lock_btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 startLockTask();
+                isPinned = true;
                 return false;
             }
         });
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                                         // edit text
                                         if (userInput.getText().toString().equals(password)) {
                                             stopLockTask();
+                                            isPinned = false;
                                         } else {
                                             dialog.cancel();
                                         }
@@ -120,19 +124,31 @@ public class MainActivity extends AppCompatActivity {
         startActivity(launchIntent);
     }
 
+    // Disabling the use of keys
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
 
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && isPinned == true) {
             Toast.makeText(this, "Volume button is disabled", Toast.LENGTH_SHORT).show();
             return true;
         }
 
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && isPinned == true) {
             Toast.makeText(this, "Volume button is disabled", Toast.LENGTH_SHORT).show();
             return true;
         }
 
+        if (keyCode == KeyEvent.KEYCODE_HOME && isPinned == true) {
+            Toast.makeText(this, "Home button is disabled", Toast.LENGTH_SHORT).show();
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_MENU && isPinned == true) {
+            Toast.makeText(this, "Menu button is disabled", Toast.LENGTH_SHORT).show();
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && isPinned == true) {
+            Toast.makeText(this, "Back button is disabled", Toast.LENGTH_SHORT).show();
+        }
         return super.onKeyDown(keyCode, event);
     }
 

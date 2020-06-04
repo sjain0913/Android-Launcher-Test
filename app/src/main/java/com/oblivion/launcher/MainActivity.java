@@ -1,11 +1,14 @@
 package com.oblivion.launcher;
 
 import android.app.AlertDialog;
+import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static boolean isScreenOn;
     final Context context = this;
     private EditText result;
     private static boolean isPinned;
@@ -31,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        ScreenOnOffReceiver onoffReceiver = new ScreenOnOffReceiver();
+        registerReceiver(onoffReceiver, filter);
         startLockTask();
         isPinned = true;
 
@@ -124,21 +132,35 @@ public class MainActivity extends AppCompatActivity {
         startActivity(launchIntent);
     }
 
+
     // Disabling the use of keys
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_HOME && isPinned == true) {
             Toast.makeText(this, "Home button is disabled", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
         if (keyCode == KeyEvent.KEYCODE_MENU && isPinned == true) {
             Toast.makeText(this, "Menu button is disabled", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
         if (keyCode == KeyEvent.KEYCODE_BACK && isPinned == true) {
             Toast.makeText(this, "Back button is disabled", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_POWER) {
+            Log.v("Screen Mode", "power button pressed");
+            if (isScreenOn) {
+                Log.v("Screen Mode", "power pressed to turn on");
+                startLockTask();
+            } else if (!isScreenOn) {
+                Log.v("Screen Mode", "power pressed to turn off");
+                stopLockTask();
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
-
 }

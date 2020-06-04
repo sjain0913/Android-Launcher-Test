@@ -127,17 +127,6 @@ public class MainActivity extends AppCompatActivity {
     // Disabling the use of keys
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
-
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && isPinned == true) {
-            Toast.makeText(this, "Volume button is disabled", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && isPinned == true) {
-            Toast.makeText(this, "Volume button is disabled", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
         if (keyCode == KeyEvent.KEYCODE_HOME && isPinned == true) {
             Toast.makeText(this, "Home button is disabled", Toast.LENGTH_SHORT).show();
         }

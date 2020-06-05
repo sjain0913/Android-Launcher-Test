@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    // only working 1st time
     @Override
     protected void onPause()
     {

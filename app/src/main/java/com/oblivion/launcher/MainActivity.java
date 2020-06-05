@@ -3,6 +3,7 @@ package com.oblivion.launcher;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -14,8 +15,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.hardware.display.DisplayManager;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -153,17 +157,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
 
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
-            Toast.makeText(this, "Volume button is disabled", Toast.LENGTH_SHORT).show();
+        if (keyCode == KeyEvent.KEYCODE_HOME && ScreenOnOffReceiver.screenOn) {
+            Toast.makeText(this, "Home button is disabled", Toast.LENGTH_SHORT).show();
             return true;
         }
 
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
-            Toast.makeText(this, "Volume button is disabled", Toast.LENGTH_SHORT).show();
+        if (keyCode == KeyEvent.KEYCODE_MENU && ScreenOnOffReceiver.screenOn) {
+            Toast.makeText(this, "Menu disabled", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && ScreenOnOffReceiver.screenOn) {
+            Toast.makeText(this, "Back disabled", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        // If the screen is off then the device has been locked
+        if (!ScreenOnOffReceiver.screenOn) {
+            stopLockTask();
+            Log.v("Screen off", "Unpinned");
+            ScreenOnOffReceiver.screenOn = false;
+            Log.v("Screen off", "Screen off");
+        }
+    }
+
+    // when app comes back, only pin screen again when app is unlocked
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ScreenOnOffReceiver.screenOn) {
+            Log.v("Screen unlocked", "Screen unlocked");
+            ScreenOnOffReceiver.screenOn = true;
+            startLockTask();
+            Log.v("Screen unlocked", "pinned");
+        }
     }
 
 

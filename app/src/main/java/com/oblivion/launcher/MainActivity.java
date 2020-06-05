@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText result;
     private static final String password = "abc";
     protected static final String[] APP_PACKAGES = {"com.oblivion.test1", "com.oblivion.test2", "com.oblivion.launcher"};
+    protected static boolean default_app = false;
 
 
     final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -72,6 +73,22 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             // Already is a device administrator, can do security operations now.
+        }
+
+        isMyAppLauncherDefault();
+        if (default_app) {
+
+        } else {
+            PackageManager packageManager = context.getPackageManager();
+            ComponentName componentName = new ComponentName(context, com.oblivion.launcher.FakeLauncherActivity.class);
+            packageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
+            Intent selector = new Intent(Intent.ACTION_MAIN);
+            selector.addCategory(Intent.CATEGORY_HOME);
+            selector.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(selector);
+
+            packageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, PackageManager.DONT_KILL_APP);
         }
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
@@ -210,5 +227,32 @@ public class MainActivity extends AppCompatActivity {
     public void onTest2ButtonClick(View v) {
         Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.oblivion.test2");
         startActivity(launchIntent);
+    }
+
+    /**
+     * method checks to see if app is currently set as default launcher
+     * @return boolean true means currently set as default, otherwise false
+     */
+    private boolean isMyAppLauncherDefault() {
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_MAIN);
+        filter.addCategory(Intent.CATEGORY_HOME);
+
+        List<IntentFilter> filters = new ArrayList<IntentFilter>();
+        filters.add(filter);
+
+        final String myPackageName = getPackageName();
+        List<ComponentName> activities = new ArrayList<ComponentName>();
+        final PackageManager packageManager = (PackageManager) getPackageManager();
+
+        packageManager.getPreferredActivities(filters, activities, null);
+
+        for (ComponentName activity : activities) {
+            if (myPackageName.equals(activity.getPackageName())) {
+                default_app = true;
+                return true;
+            }
+        }
+        default_app = false;
+        return false;
     }
 }

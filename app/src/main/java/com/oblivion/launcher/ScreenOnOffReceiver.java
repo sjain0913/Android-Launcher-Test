@@ -22,10 +22,10 @@ public class ScreenOnOffReceiver extends BroadcastReceiver {
         } else {
             if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                 Log.v("Screen Mode", "Screen in on state");
+                screenOn = true;
                 KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
                 if(!myKM.isKeyguardLocked()) {
                     Log.v("Phone Lock", "Phone Unlocked");
-                    screenOn = true;
                 }
             }
         }

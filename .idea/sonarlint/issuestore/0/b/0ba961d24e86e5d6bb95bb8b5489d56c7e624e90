@@ -1,0 +1,10 @@
+
+P
+java:S1444".Make this "public static screenOn" field final(‹ßÈúÿÿÿÿ8’ÒÚ•¨.
+X
+java:S2696"6Make the enclosing method "static" or remove this set.(º£Ì£şÿÿÿÿ8–ª–¨.
+S
+java:S2696"6Make the enclosing method "static" or remove this set.(ÊàÇÁ8Ëš ˜¨.
+v
+java:S1104"TMake screenOn a static final constant or non-public and provide accessors if needed.(‹ßÈúÿÿÿÿ8’ÒÚ•¨.
+]	java:S125"<This block of commented-out lines of code should be removed.(¾á—¨ùÿÿÿÿ8¡©Ú•¨.

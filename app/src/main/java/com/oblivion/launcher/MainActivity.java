@@ -2,6 +2,7 @@ package com.oblivion.launcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     DevicePolicyManager mDPM;
     ComponentName mAdminName;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,13 +123,6 @@ public class MainActivity extends AppCompatActivity {
         unlock_btn.setX(250);
         unlock_btn.setY(400);
 
-        lock_btn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                startLockTask();
-                return false;
-            }
-        });
 
         unlock_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,6 +184,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (keyCode == KeyEvent.KEYCODE_POWER) {
+            Log.v("Button", "i was pressed power");
+        }
+
         return super.onKeyDown(keyCode, event);
     }
 
@@ -196,26 +195,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause()
     {
-        super.onPause();
         // If the screen is off then the device has been locked
         if (!ScreenOnOffReceiver.screenOn) {
             stopLockTask();
             Log.v("Screen off", "Unpinned");
             ScreenOnOffReceiver.screenOn = false;
             Log.v("Screen off", "Screen off");
+            mDPM.lockNow();
+            Log.v("Screen locked", "Screen locked");
         }
+        super.onPause();
     }
 
     // when app comes back, only pin screen again when app is unlocked
     @Override
     protected void onResume() {
-        super.onResume();
         if (ScreenOnOffReceiver.screenOn) {
             Log.v("Screen unlocked", "Screen unlocked");
             ScreenOnOffReceiver.screenOn = true;
             startLockTask();
             Log.v("Screen unlocked", "pinned");
         }
+        super.onResume();
     }
 
 

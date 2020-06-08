@@ -1,4 +1,4 @@
-package com.oblivion.launcher;
+package com.oblivion.newlauncher;
 
 import android.app.Activity;
 

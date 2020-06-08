@@ -39,15 +39,15 @@ public class MainActivity extends AppCompatActivity {
         try {
             test1Icon.setImageDrawable(Helpers.getActivityIcon(this, "com.oblivion.test1", "com.oblivion.test1.MainActivity"));
         } catch (Exception e) {}
-        test1Icon.setX(50);
-        test1Icon.setY(50);
+//        test1Icon.setX(50);
+//        test1Icon.setY(50);
 
         ImageView test2Icon = (ImageView) findViewById(R.id.test2Button);
         try {
             test2Icon.setImageDrawable(Helpers.getActivityIcon(this, "com.oblivion.test2", "com.oblivion.test2.MainActivity"));
         } catch (Exception e) {}
-        test2Icon.setX(250);
-        test2Icon.setY(50);
+//        test2Icon.setX(250);
+//        test2Icon.setY(50);
 
         isMyAppLauncherDefault();
         if (default_app) {
@@ -66,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Button lock_btn = (Button)findViewById(com.oblivion.newlauncher.R.id.lock_button);
-        lock_btn.setX(50);
-        lock_btn.setY(400);
+//        lock_btn.setX(50);
+//        lock_btn.setY(400);
 
         Button unlock_btn = (Button)findViewById(com.oblivion.newlauncher.R.id.unlock_button);
-        unlock_btn.setX(250);
-        unlock_btn.setY(400);
+//        unlock_btn.setX(250);
+//        unlock_btn.setY(400);
 
         lock_btn.setOnClickListener(new View.OnClickListener() {
             @Override

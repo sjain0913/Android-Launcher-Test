@@ -1,4 +1,4 @@
-package com.oblivion.launcher;
+package com.oblivion.newlauncher;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.oblivion.launcher", appContext.getPackageName());
+        assertEquals("com.oblivion.newlauncher", appContext.getPackageName());
     }
 }

@@ -23,8 +23,9 @@
         android:id="@+id/imgWallpaper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:scaleType="fitXY" />
+        android:onClick="onWallpaperClick"
+        android:scaleType="fitXY"
+        tools:layout_editor_absoluteY="10dp" />
 
     <ImageView
         android:id="@+id/test1Button"

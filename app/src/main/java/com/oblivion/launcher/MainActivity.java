@@ -1,7 +1,10 @@
 package com.oblivion.launcher;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
@@ -41,12 +44,18 @@ public class MainActivity extends AppCompatActivity {
     private static final String password = "abc";
     public ImageView imgWallpaper;
     public static final int RESULT_PRO_IMG=1;
+    public static boolean photoPick = false;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imgWallpaper = (ImageView) findViewById(R.id.imgWallpaper);
+        verifyStoragePermissions(this);
 
         ImageView test1Icon = (ImageView) findViewById(R.id.test1Button);
         try {
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         Button lock_btn = (Button)findViewById(com.oblivion.launcher.R.id.lock_button);
         Button unlock_btn = (Button)findViewById(com.oblivion.launcher.R.id.unlock_button);
         Button wallpaper_btn = (Button)findViewById(R.id.wallpaper);
+        imgWallpaper = (ImageView) findViewById(R.id.imgWallpaper);
 
         lock_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,12 +136,13 @@ public class MainActivity extends AppCompatActivity {
         wallpaper_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                photoPick = true;
+                Log.v("wallpaper", "change initiated");
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(photoPickerIntent, RESULT_PRO_IMG);
             }
         });
-
     }
 
     @Override
@@ -155,10 +166,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    public void onWallpaperClick(View v) {
+
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
-        if (locked && !allowed) {
+        if (locked && !allowed && !photoPick) {
             ActivityManager activityManager = (ActivityManager) getApplicationContext()
                     .getSystemService(Context.ACTIVITY_SERVICE);
 
@@ -200,12 +215,15 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 if (bitmap != null) {
                                     myWallpaperManager.setBitmap(bitmap);
+                                    Toast.makeText(MainActivity.this, "Wallpaper set Successfully !!", Toast.LENGTH_LONG).show();
                                 } else {
+                                    Toast.makeText(MainActivity.this, "Your bitmap object is null !!", Toast.LENGTH_LONG).show();
                                 }
                                 //set wallpaper picture from resource here
 
                             } catch (IOException e) {
-                        }
+                                Toast.makeText(MainActivity.this, "Something went wrong !!", Toast.LENGTH_LONG).show();
+                            }
 
                            /* Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
                                     width, height, matrix, true);
@@ -218,10 +236,35 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     } else {
+                        Toast.makeText(MainActivity.this, "You haven't pick img", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_LONG)
+                            .show();
                 }
                 break;
+        }
+        photoPick = false;
+    }
+
+    /**
+     * Checks if the app has permission to write to device storage
+     *
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity
+     */
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
         }
     }
 }

@@ -1,11 +1,9 @@
 
-Ò
-java:S1598"»This file "Helpers.java" should be located in "com\oblivion\newlauncher" directory, not in "C:\Users\Sam\Documents\Work\BostonScientific\Launcher\app\src\main\java\com\oblivion\launcher".(“¤´ã
-F
-java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
 T
 java:S1128"9Remove this unused import 'android.content.IntentFilter'.(ò³ñ£ÿÿÿÿÿ
-F
-java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
-P
-java:S1118":Add a private constructor to hide the implicit public one.(ÓÆ¿ƒ
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8»Ä˜ª.
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8»Ä˜ª.
+W
+java:S1118":Add a private constructor to hide the implicit public one.(ÓÆ¿ƒ8»Ä˜ª.

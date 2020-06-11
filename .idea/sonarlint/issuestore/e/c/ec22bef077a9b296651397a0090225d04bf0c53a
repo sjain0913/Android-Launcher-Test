@@ -1,0 +1,52 @@
+
+X	java:S1257"<This block of commented-out lines of code should be removed.(“ş›8ãƒöç©.
+O
+java:S1444"-Make this "public static allowed" field final(æÒÖÕşÿÿÿÿ8øşØæ©.
+J
+java:S1172k"(Remove this unused method parameter "v".(öİôÊûÿÿÿÿ8±Íç©.
+U
+java:S2589”"7Remove this expression which always evaluates to "true"(ÖÃƒ8±Íç©.
+E
+java:S1172q"(Remove this unused method parameter "v".(Ø¾¸8±Íç©.
+o
+java:S1104"RMake locked a static final constant or non-public and provide accessors if needed.(ÜÌİ8øşØæ©.
+s
+java:S3008"VRename this field "default_app" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹®¢«8øşØæ©.
+r	java:S1172"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜Õ×áúÿÿÿÿ8øşØæ©.
+W
+java:S1128":Remove this unused import 'android.content.ComponentName'.(½‹æŠ8ÌÅöç©.
+u
+java:S1104"SMake allowed a static final constant or non-public and provide accessors if needed.(æÒÖÕşÿÿÿÿ8øşØæ©.
+S
+java:S2696l"6Make the enclosing method "static" or remove this set.(æáıË8±Íç©.
+T
+java:S2696•"6Make the enclosing method "static" or remove this set.(½ìüÅ8±Íç©.
+J	java:S108*")Either remove or fill this block of code.(¬Àáªøÿÿÿÿ8±Íç©.
+[
+java:S1128"9Remove this unused import 'android.content.IntentFilter'.(ò³ñ£ÿÿÿÿÿ8ÌÅöç©.
+C
+java:S1170"!Make this final field static too.(ºë¾èøÿÿÿÿ8øşØæ©.
+d
+java:S1192{"GDefine a constant instead of duplicating this literal "button" 3 times.(àœ¿ß8±Íç©.
+X
+java:S2696X"6Make the enclosing method "static" or remove this set.(ÔÜ·Áûÿÿÿÿ8±Íç©.
+I
+java:S1444",Make this "public static locked" field final(ÜÌİ8øşØæ©.
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ÌÅöç©.
+F
+java:S1172`")Remove this unused method parameter "id".(ı§„Ô8±Íç©.
+`
+java:S1128">Remove this unused import 'android.content.pm.PackageManager'.(€®¥õÿÿÿÿÿ8ÌÅöç©.
+S
+java:S2696r"6Make the enclosing method "static" or remove this set.(æáıË8±Íç©.
+X
+java:S2696="6Make the enclosing method "static" or remove this set.(ô‹Ğÿÿÿÿÿ8±Íç©.
+F
+java:S1172T")Remove this unused method parameter "id".(ı§„Ô8±Íç©.
+{	java:S115 "ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.( ×ÄÄùÿÿÿÿ8øşØæ©.
+r	java:S1176"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÆóÆşøÿÿÿÿ8±Íç©.
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8ÌÅöç©.
+J	java:S108/")Either remove or fill this block of code.(¬Àáªøÿÿÿÿ8±Íç©.
+X	java:S1253"<This block of commented-out lines of code should be removed.(ÕûÑ8ãƒöç©.

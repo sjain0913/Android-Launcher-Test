@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Boston Scientific</string>
+    <string name="change_default_home_dialog_body">Change Home</string>
 </resources>

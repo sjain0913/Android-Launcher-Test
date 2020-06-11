@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+// This is a launcher I am building for Boston Scientific's Enterprise Mobile Management System in Java
+
 public class MainActivity extends AppCompatActivity {
     final Context context = this;
     protected static boolean default_app = false;
@@ -44,14 +46,8 @@ public class MainActivity extends AppCompatActivity {
             test2Icon.setImageDrawable(Helpers.getActivityIcon(this, "com.oblivion.test2", "com.oblivion.test2.MainActivity"));
         } catch (Exception e) {}
 
-
         Button lock_btn = (Button)findViewById(com.oblivion.launcher.R.id.lock_button);
-//        lock_btn.setX(50);
-//        lock_btn.setY(400);
-
         Button unlock_btn = (Button)findViewById(com.oblivion.launcher.R.id.unlock_button);
-//        unlock_btn.setX(250);
-//        unlock_btn.setY(400);
 
         lock_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,21 +55,17 @@ public class MainActivity extends AppCompatActivity {
                locked = true;
             }
         });
-
         unlock_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LayoutInflater li = LayoutInflater.from(context);
                 View promptsView = li.inflate(R.layout.prompts, null);
-
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
-
                 final EditText userInput = (EditText) promptsView
                         .findViewById(R.id.editTextDialogUserInput);
-
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
@@ -95,23 +87,28 @@ public class MainActivity extends AppCompatActivity {
                                         dialog.cancel();
                                     }
                                 });
-
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
         });
-    }
 
-    public void onTest1ButtonClick(View v) {
-        allowed = true;
-        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.oblivion.test1");
-        startActivity(launchIntent);
-    }
+        test1Icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allowed = true;
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.oblivion.test1");
+                startActivity(launchIntent);
+            }
+        });
 
-    public void onTest2ButtonClick(View v) {
-        allowed = true;
-        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.oblivion.test2");
-        startActivity(launchIntent);
+        test2Icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allowed = true;
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.oblivion.test2");
+                startActivity(launchIntent);
+            }
+        });
     }
 
     @Override

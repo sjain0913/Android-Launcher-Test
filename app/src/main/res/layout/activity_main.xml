@@ -6,16 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/wallpaper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginBottom="4dp"
+        android:onClick="onWallpaperClick"
+        android:text="Change Wallpaper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgWallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="onWallpaperClick"
+        android:scaleType="fitXY"
+        tools:layout_editor_absoluteY="10dp" />
+
     <ImageView
         android:id="@+id/test1Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round"
         android:layout_marginStart="50dp"
         android:layout_marginTop="80dp"
-        android:onClick="onTest1ButtonClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
     <ImageView
         android:id="@+id/test2Button"
@@ -23,10 +44,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginTop="80dp"
-        android:onClick="onTest2ButtonClick"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <Button
         android:id="@+id/lock_button"

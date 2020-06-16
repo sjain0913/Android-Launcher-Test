@@ -39,8 +39,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     final Context context = this;
     protected static boolean default_app = false;
-    public static boolean locked = true;
-    public static boolean allowed = false;
+    public boolean locked = true;
+    public boolean allowed = false;
     private static final String password = "abc";
     public ImageView imgWallpaper;
     public static final int RESULT_PRO_IMG=1;
@@ -55,13 +55,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // checking if the required permissions are granted, if not it asks
         verifyStoragePermissions(this);
 
+        // settings app icons
         ImageView test1Icon = (ImageView) findViewById(R.id.test1Button);
         try {
             test1Icon.setImageDrawable(Helpers.getActivityIcon(this, "com.oblivion.test1", "com.oblivion.test1.MainActivity"));
         } catch (Exception e) {}
-
         ImageView test2Icon = (ImageView) findViewById(R.id.test2Button);
         try {
             test2Icon.setImageDrawable(Helpers.getActivityIcon(this, "com.oblivion.test2", "com.oblivion.test2.MainActivity"));
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         Button wallpaper_btn = (Button)findViewById(R.id.wallpaper);
         imgWallpaper = (ImageView) findViewById(R.id.imgWallpaper);
 
+        // behaviors for lock, unlock, change wallpaper
         lock_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         // get user input and set it to result
-                                        // edit text
                                         if (userInput.getText().toString().equals(password)) {
                                             locked = false;
                                         } else {
@@ -104,8 +106,7 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     }
                                 })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         dialog.cancel();
                                     }
@@ -120,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 allowed = true;
                 Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.oblivion.test1");
+                launchIntent.setAction(Intent.ACTION_MAIN);
+                launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(launchIntent);
             }
         });
@@ -129,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 allowed = true;
                 Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.oblivion.test2");
+                launchIntent.setAction(Intent.ACTION_MAIN);
+                launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(launchIntent);
             }
         });
@@ -149,17 +156,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event){
 
         if (keyCode == KeyEvent.KEYCODE_HOME) {
-            Log.v("button", "home pressed");
             return true;
         }
 
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            Log.v("button", "menu pressed");
             return true;
         }
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.v("button", "back pressed");
             return true;
         }
 
@@ -167,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onWallpaperClick(View v) {
-
     }
 
     @Override
@@ -204,8 +207,6 @@ public class MainActivity extends AppCompatActivity {
                             String filePath = c.getString(cIndex);
                             c.close();
                             Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                            int width = bitmap.getWidth();
-                            int height = bitmap.getHeight();
                             Matrix matrix = new Matrix();
                             matrix.postRotate(0);
                             imgWallpaper.setImageBitmap(bitmap);
@@ -224,14 +225,6 @@ public class MainActivity extends AppCompatActivity {
                             } catch (IOException e) {
                                 Toast.makeText(MainActivity.this, "Something went wrong !!", Toast.LENGTH_LONG).show();
                             }
-
-                           /* Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
-                                    width, height, matrix, true);
-                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100,
-                                    outputStream);
-                            imgProduct.setImageBitmap(resizedBitmap);
-                            decodeProfileImg(sDecode);*/
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
